@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<!-- form view of view_stock_request_form inherited -->
+		<record id="view_stock_request_form_inherited" model="ir.ui.view">
+			<field name="name">view.stock.request.form.inherited</field>
+			<field name="model">stock.request</field>
+			<field name="inherit_id" ref="stock_request.stock_request_form_view"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='location_id']" position="before">
+					<field name="through_transit_location"/>
+				</xpath>
+				<xpath expr="//field[@name='location_dest_id']" position="after">
+					<field name="transit_location_id"
+						   attrs="{'invisible':[('through_transit_location','=',False)],'required':[('through_transit_location','=',True)]}"
+						   options="{'no_create':True}"/>
+				</xpath>
+
+			</field>
+		</record>
+
+	</data>
+</openerp>
